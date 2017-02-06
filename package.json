@@ -19,6 +19,6 @@
   "homepage": "https://github.com/IDEO-coLAB/nomad-sensor-hello#readme",
   "dependencies": {
     "moment": "^2.16.0",
-    "nomad-stream": "0.0.6"
+    "nomad-stream": "ideo-colab/nomad#b409c3f7d8cc9085182b8ce3dd8e7ada0b913946"
   }
 }

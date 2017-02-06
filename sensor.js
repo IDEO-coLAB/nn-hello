@@ -3,26 +3,20 @@ const moment = require('moment')
 const nomad = new Nomad()
 
 let instance = null
-const birthdate = moment('2016-11-10')
+const birthdate = moment('2017-02-03')
 
-const publishFrequency = 5 * 60 * 1000
+const publishFrequency = 10 * 1000
 
 function getMessage() {
-	const message = `Hello from the Nomad beacon!\nNomad was born ${birthdate.fromNow()} on ${birthdate.format('MMMM Do, YYYY')}.\nThis message was sent at ${moment().format('h:mm a')} UTC.\nIt's a plain text message, but nodes can publish structured data too as stringified JSON.`
+	return `Hello from the Nomad floodsub beacon!\nFloodsub was born ${birthdate.fromNow()} on ${birthdate.format('MMMM Do, YYYY')}.\nThis message was sent at ${moment().format('h:mm a')} UTC.\n`
+}
 
-		return message
-	}
-
-nomad.prepareToPublish().then((n) => {
-  instance = n
-  return instance.publishRoot(getMessage())
-}).then(() => {
+nomad.start().then(() => {
+  console.log('id is', nomad.identity.id)
   setInterval(() => {
-    instance.publish(getMessage())
+    nomad.publish(getMessage())
     .catch(err => {
       console.log(`Error: ${err}`)
     })
   }, publishFrequency)  
 })
-
-// console.log(getMessage())
