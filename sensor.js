@@ -1,22 +1,23 @@
-const Nomad = require('nomad-stream')
+
 const moment = require('moment')
-const nomad = new Nomad()
+const Nomad = require('nomad-stream')
+const utils = require('./utils')
 
-let instance = null
-const birthdate = moment('2017-02-03')
+const privateKey = utils.getPrivateKey()
+const publishFrequencyInSeconds = 5
 
-const publishFrequency = 10 * 1000
-
-function getMessage() {
-	return `Hello from the Nomad floodsub beacon!\nFloodsub was born ${birthdate.fromNow()} on ${birthdate.format('MMMM Do, YYYY')}.\nThis message was sent at ${moment().format('h:mm a')} UTC.\n`
+function message() {
+	return `Hello from the Nomad test beacon`
 }
 
-nomad.start().then(() => {
+const nomad = new Nomad(utils.nomadConfig)
+nomad.start(privateKey).then(() => {
   console.log('id is', nomad.identity.id)
   setInterval(() => {
-    nomad.publish(getMessage())
+  	console.log('publishing')
+    nomad.publish(message())
     .catch(err => {
       console.log(`Error: ${err}`)
     })
-  }, publishFrequency)  
+  }, publishFrequencyInSeconds * 1000)  
 })
