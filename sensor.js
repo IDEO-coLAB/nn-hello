@@ -14,8 +14,9 @@ const nomad = new Nomad(utils.nomadConfig)
 nomad.start(privateKey).then(() => {
   console.log('id is', nomad.identity.id)
   setInterval(() => {
-  	console.log('publishing')
-    nomad.publish(message())
+  	const msg = message()
+  	console.log('publishing:', msg)
+    nomad.publish(msg)
     .catch(err => {
       console.log(`Error: ${err}`)
     })
