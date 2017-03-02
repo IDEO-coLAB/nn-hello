@@ -20,6 +20,7 @@
   "dependencies": {
     "ipfs": "^0.22.0",
     "moment": "^2.16.0",
-    "nomad-stream": "git://github.com/ideo-colab/nomad.git#sprint-release"
+    "nomad-stream": "git://github.com/ideo-colab/nomad.git#sprint-release",
+    "segfault-handler": "^1.0.0"
   }
 }

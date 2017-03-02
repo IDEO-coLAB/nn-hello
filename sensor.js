@@ -3,6 +3,9 @@ const moment = require('moment')
 const Nomad = require('nomad-stream')
 const utils = require('./utils')
 
+const SegfaultHandler = require('segfault-handler')
+SegfaultHandler.registerHandler("crash.log")
+
 const privateKey = utils.getPrivateKey()
 const publishFrequencyInSeconds = 5
 
